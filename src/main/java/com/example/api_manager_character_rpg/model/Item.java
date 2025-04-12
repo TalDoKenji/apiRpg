@@ -1,6 +1,7 @@
 package com.example.api_manager_character_rpg.model;
 
 import com.example.api_manager_character_rpg.enums.TypeItem;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -35,5 +36,11 @@ public class Item {
     @Column(name = "defense_points")
     @Max(value = 10)
     private Integer defensePoints;
+
+    @ManyToOne
+    @JoinColumn(name = "character_id")
+    @JsonIgnoreProperties("items")
+    private Character character;
+
 
 }

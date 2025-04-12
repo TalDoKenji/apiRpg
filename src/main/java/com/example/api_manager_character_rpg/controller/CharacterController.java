@@ -52,17 +52,17 @@ public class CharacterController {
         return ResponseEntity.created(uri).build();
     }
 
-    @PutMapping("/addItem/{id}")
-    public ResponseEntity<Character> addItem(@PathVariable Long id, @RequestBody ItemDTO itemDTO){
-        service.addItem(id, itemDTO);
-        return ResponseEntity.ok().build();
-    }
-
-    @PutMapping("/removeItem/{id}")
-    public ResponseEntity<Character> remove(@PathVariable Long id, @RequestBody ItemDTO itemDTO){
-        service.removeItem(id, itemDTO);
-        return ResponseEntity.ok().build();
-    }
+//    @PutMapping("/addItem/{id}")
+//    public ResponseEntity<Character> addItem(@PathVariable Long id, @RequestBody ItemDTO itemDTO){
+//        service.addItem(id, itemDTO);
+//        return ResponseEntity.ok().build();
+//    }
+//
+//    @PutMapping("/removeItem/{id}")
+//    public ResponseEntity<Character> remove(@PathVariable Long id, @RequestBody ItemDTO itemDTO){
+//        service.removeItem(id, itemDTO);
+//        return ResponseEntity.ok().build();
+//    }
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody UpdateNameSummonerDTO updatedNameSummonerDTO){

@@ -12,22 +12,27 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class ItemService {
 
-    private final ItemRepository repository;
+    private final ItemRepository itemRepository;
+    private final CharacterService characterService;
 
     public Item create(Item item){
-        return repository.save(item);
+       Item itemSaved = itemRepository.save(item);
+       characterService.updateAddPointsCharacter(itemSaved.getCharacter().getId(), itemSaved.getId());
+       return itemSaved;
     }
 
     public List<Item> findAll(){
-        return repository.findAll();
+        return itemRepository.findAll();
     }
 
     public Item findById(Long id){
-        return repository.findById(id).orElseThrow(()-> new EntityNotFoundException("Item not found"));
+        return itemRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Item not found"));
     }
 
     public void delete(Long id){
-        repository.deleteById(id);
+        Item itemFound = this.findById(id);
+        characterService.updateRemovePointsCharacter(itemFound.getCharacter().getId(), id);
+        itemRepository.deleteById(id);
     }
 
 }

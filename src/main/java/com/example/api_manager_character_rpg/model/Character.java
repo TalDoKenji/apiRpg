@@ -1,6 +1,7 @@
 package com.example.api_manager_character_rpg.model;
 
 import com.example.api_manager_character_rpg.enums.Class;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -48,7 +49,8 @@ public class Character {
     @NotNull()
     private Integer defensePoints;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "character",cascade = CascadeType.ALL)
+   @JsonIgnoreProperties("character")
     private List<Item> items;
 
 
