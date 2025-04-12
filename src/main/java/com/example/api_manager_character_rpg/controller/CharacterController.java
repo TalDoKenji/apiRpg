@@ -1,6 +1,7 @@
 package com.example.api_manager_character_rpg.controller;
 
 import com.example.api_manager_character_rpg.DTO.ItemDTO;
+import com.example.api_manager_character_rpg.DTO.UpdateNameSummonerDTO;
 import com.example.api_manager_character_rpg.model.Character;
 import com.example.api_manager_character_rpg.model.Item;
 import com.example.api_manager_character_rpg.service.CharacterService;
@@ -64,8 +65,8 @@ public class CharacterController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody String updatedNameSummoner){
-        service.updateNameSummoner(id, updatedNameSummoner);
+    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody UpdateNameSummonerDTO updatedNameSummonerDTO){
+        service.updateNameSummoner(id, updatedNameSummonerDTO);
         return ResponseEntity.ok().build();
     }
 
