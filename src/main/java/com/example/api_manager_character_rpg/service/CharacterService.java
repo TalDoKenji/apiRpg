@@ -1,5 +1,6 @@
 package com.example.api_manager_character_rpg.service;
 
+import com.example.api_manager_character_rpg.DTO.ItemDTO;
 import com.example.api_manager_character_rpg.model.Character;
 import com.example.api_manager_character_rpg.model.Item;
 import com.example.api_manager_character_rpg.repository.CharacterRepository;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 public class CharacterService {
 
     private final CharacterRepository repository;
+    private final ItemService itemService;
 
     public Character create(Character character){
         return repository.save(character);
@@ -23,7 +25,7 @@ public class CharacterService {
     }
 
     public Character findById(Long id){
-        return repository.findById(id).orElseThrow(()-> new EntityNotFoundException("Character not found"));
+        return repository.findById(id).orElseThrow(()-> new EntityNotFoundException("not found"));
     }
 
     public void updateNameSummoner(Long id, String updatedNameSummoner){
@@ -36,18 +38,26 @@ public class CharacterService {
         repository.deleteById(id);
     }
 
-    public List<Item>findItems(Long idCharacter){
-        return null;
+    public List<Item> findItems(Long idCharacter){
+        return this.findById(idCharacter).getItems();
     }
 
-    public void addItem(){
-
+    public void addItem(Long idCharacter, ItemDTO itemDTO){
+        Character character = this.findById(idCharacter);
+        character.getItems().add(itemService.findById(itemDTO.getId()));
+        repository.save(character);
     }
 
-    public void removeItem(){
-
+    public void removeItem(Long idCharacter, ItemDTO itemDTO){
+        Character character = this.findById(idCharacter);
+        character.getItems().remove(itemService.findById(itemDTO.getId()));
+        repository.save(character);
     }
 
+    private void updatePointsCharacter(Long id){
+        this.findById(id);
+
+    }
 
 
 }

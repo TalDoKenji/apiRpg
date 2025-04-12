@@ -8,6 +8,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
+
+import java.util.List;
 
 @Entity()
 @Table(name = "table_character")
@@ -17,7 +20,7 @@ import lombok.NoArgsConstructor;
 public class Character {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "name_character")
@@ -37,12 +40,16 @@ public class Character {
     @Min(value = 1)
     private Integer level;
 
-    @Column(name = "atack")
+    @Column(name = "attack")
     @NotNull()
-    private Integer atackPoints;
+    private Integer attackPoints;
 
     @Column(name = "defense")
     @NotNull()
     private Integer defensePoints;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Item> items;
+
 
 }

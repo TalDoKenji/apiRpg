@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class Item {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "name")
@@ -28,17 +28,12 @@ public class Item {
     @NotNull
     private TypeItem typeItem;
 
-    @Column(name = "atack_points")
-    @Min(value = 1)
+    @Column(name = "attack_points")
     @Max(value = 10)
-    private Integer atackPoints;
+    private Integer attackPoints;
 
     @Column(name = "defense_points")
-    @Min(value = 1)
     @Max(value = 10)
     private Integer defensePoints;
-
-    @Column(name = "features")
-    private String features;
 
 }

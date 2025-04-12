@@ -14,8 +14,8 @@ public class ItemService {
 
     private final ItemRepository repository;
 
-    public void create(Item item){
-        repository.save(item);
+    public Item create(Item item){
+        return repository.save(item);
     }
 
     public List<Item> findAll(){
@@ -25,4 +25,9 @@ public class ItemService {
     public Item findById(Long id){
         return repository.findById(id).orElseThrow(()-> new EntityNotFoundException("Item not found"));
     }
+
+    public void delete(Long id){
+        repository.deleteById(id);
+    }
+
 }
