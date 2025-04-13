@@ -19,13 +19,13 @@ public class ItemController {
     private final ItemService service;
 
     @GetMapping()
-    public ResponseEntity<List<Item>> findAll(){
+    public ResponseEntity<List<Item>> findAll() {
         List<Item> items = service.findAll();
         return ResponseEntity.ok(items);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Item> findById(@PathVariable Long id){
+    public ResponseEntity<Item> findById(@PathVariable Long id) {
         Item item = service.findById(id);
         return ResponseEntity.ok(item);
     }
@@ -44,7 +44,7 @@ public class ItemController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }

@@ -21,28 +21,28 @@ public class CharacterController {
     private final CharacterService service;
 
     @GetMapping()
-    public ResponseEntity<List<Character>> findAll(){
+    public ResponseEntity<List<Character>> findAll() {
         List<Character> characters = service.findAll();
         return ResponseEntity.ok(characters);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Character> findById(@PathVariable Long id){
+    public ResponseEntity<Character> findById(@PathVariable Long id) {
         Character character = service.findById(id);
         return ResponseEntity.ok(character);
     }
 
     @GetMapping("/findItems/{id}")
-    public ResponseEntity<List<Item>> findItems(@PathVariable Long id){
+    public ResponseEntity<List<Item>> findItems(@PathVariable Long id) {
         List<Item> items = service.findItems(id);
         return ResponseEntity.ok(items);
     }
 
-   @GetMapping("/findAmulet/{id}")
-   public ResponseEntity<Item> findAmulet(@PathVariable Long id){
+    @GetMapping("/findAmulet/{id}")
+    public ResponseEntity<Item> findAmulet(@PathVariable Long id) {
         Item item = service.findAmulet(id);
         return ResponseEntity.ok(item);
-   }
+    }
 
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody Character character) throws Exception {
@@ -58,13 +58,13 @@ public class CharacterController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody UpdateNameSummonerDTO updatedNameSummonerDTO){
+    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody UpdateNameSummonerDTO updatedNameSummonerDTO) {
         service.updateNameSummoner(id, updatedNameSummonerDTO);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
