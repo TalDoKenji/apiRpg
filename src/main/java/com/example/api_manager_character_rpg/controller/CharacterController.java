@@ -1,6 +1,5 @@
 package com.example.api_manager_character_rpg.controller;
 
-import com.example.api_manager_character_rpg.DTO.ItemDTO;
 import com.example.api_manager_character_rpg.DTO.UpdateNameSummonerDTO;
 import com.example.api_manager_character_rpg.model.Character;
 import com.example.api_manager_character_rpg.model.Item;
@@ -39,8 +38,14 @@ public class CharacterController {
         return ResponseEntity.ok(items);
     }
 
+   @GetMapping("/findAmulet/{id}")
+   public ResponseEntity<Item> findAmulet(@PathVariable Long id){
+        Item item = service.findAmulet(id);
+        return ResponseEntity.ok(item);
+   }
+
     @PostMapping
-    public ResponseEntity<Void> create(@RequestBody Character character){
+    public ResponseEntity<Void> create(@RequestBody Character character) throws Exception {
         Character newCharacter = service.create(character);
 
         URI uri = ServletUriComponentsBuilder

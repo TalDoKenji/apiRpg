@@ -3,21 +3,22 @@ package com.example.api_manager_character_rpg.model;
 import com.example.api_manager_character_rpg.enums.Class;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Cascade;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@Entity()
+@Entity
 @Table(name = "table_character")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@EqualsAndHashCode(of = {"id"})
 public class Character {
 
     @Id
@@ -33,6 +34,7 @@ public class Character {
     private String nameSummoner;
 
     @Column(name = "class")
+    @Enumerated(EnumType.STRING)
     @NotNull()
     private Class classCharacter;
 
@@ -49,9 +51,10 @@ public class Character {
     @NotNull()
     private Integer defensePoints;
 
-    @OneToMany(mappedBy = "character",cascade = CascadeType.ALL)
-   @JsonIgnoreProperties("character")
-    private List<Item> items;
+
+    @OneToMany(mappedBy = "character", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("character")
+    private List<Item> items = new ArrayList<>();
 
 
 }

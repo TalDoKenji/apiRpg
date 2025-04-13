@@ -31,7 +31,7 @@ public class ItemController {
     }
 
     @PostMapping()
-    public ResponseEntity<Void> create(@RequestBody Item item){
+    public ResponseEntity<Void> create(@RequestBody Item item) throws Exception {
         Item newItem = service.create(item);
 
         URI uri = ServletUriComponentsBuilder
