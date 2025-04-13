@@ -49,17 +49,16 @@ public class CharacterService {
         return this.findById(idCharacter).getItems();
     }
 
-    public void updateAddPointsCharacter(Long idCharacter, Long idItem){
+    public void updateAddPointsCharacter(Long idCharacter, Item item){
         Character character = this.findById(idCharacter);
-        Item item = this.findItemById(idItem);
+
         character.setAttackPoints(character.getAttackPoints() + item.getAttackPoints());
         character.setDefensePoints(character.getDefensePoints() + item.getDefensePoints());
         characterRepository.save(character);
     }
 
-    public void updateRemovePointsCharacter(Long idCharacter, Long idItem){
+    public void updateRemovePointsCharacter(Long idCharacter, Item item){
         Character character = this.findById(idCharacter);
-        Item item = this.findItemById(idItem);
 
         character.setAttackPoints(character.getAttackPoints() - item.getAttackPoints());
         character.setDefensePoints(character.getDefensePoints() - item.getDefensePoints());

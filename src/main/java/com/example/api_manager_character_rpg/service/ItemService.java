@@ -23,7 +23,7 @@ public class ItemService {
        validator.validAmulet(characterService.findById(item.getCharacter().getId()));
        validator.validTypeItem(item);
        Item itemSaved = itemRepository.save(item);
-       characterService.updateAddPointsCharacter(itemSaved.getCharacter().getId(), itemSaved.getId());
+       characterService.updateAddPointsCharacter(itemSaved.getCharacter().getId(), itemSaved);
        return itemSaved;
     }
 
@@ -37,7 +37,7 @@ public class ItemService {
 
     public void delete(Long id){
         Item itemFound = this.findById(id);
-        characterService.updateRemovePointsCharacter(itemFound.getCharacter().getId(), id);
+        characterService.updateRemovePointsCharacter(itemFound.getCharacter().getId(), itemFound);
         itemRepository.deleteById(id);
     }
 
