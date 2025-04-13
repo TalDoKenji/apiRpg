@@ -1,6 +1,7 @@
 package com.example.api_manager_character_rpg.service;
 
 import com.example.api_manager_character_rpg.enums.TypeItem;
+import com.example.api_manager_character_rpg.exception.NotFound;
 import com.example.api_manager_character_rpg.model.Item;
 import com.example.api_manager_character_rpg.repository.ItemRepository;
 import java.util.List;
@@ -20,7 +21,7 @@ public class ItemService {
 
     public Item create(Item item) throws Exception {
        validator.validStatus(item);
-       validator.validAmulet(characterService.findById(item.getCharacter().getId()));
+       validator.validAmulet(characterService.findById(item.getCharacter().getId()), item);
        validator.validTypeItem(item);
        Item itemSaved = itemRepository.save(item);
        characterService.updateAddPointsCharacter(itemSaved.getCharacter().getId(), itemSaved);
@@ -32,7 +33,7 @@ public class ItemService {
     }
 
     public Item findById(Long id){
-        return itemRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Item not found"));
+        return itemRepository.findById(id).orElseThrow(()-> new NotFound("Item not found"));
     }
 
     public void delete(Long id){

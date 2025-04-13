@@ -2,6 +2,7 @@ package com.example.api_manager_character_rpg.service;
 
 import com.example.api_manager_character_rpg.DTO.UpdateNameSummonerDTO;
 import com.example.api_manager_character_rpg.enums.TypeItem;
+import com.example.api_manager_character_rpg.exception.NotFound;
 import com.example.api_manager_character_rpg.model.Character;
 import com.example.api_manager_character_rpg.model.Item;
 import com.example.api_manager_character_rpg.repository.CharacterRepository;
@@ -19,7 +20,6 @@ import org.springframework.stereotype.Service;
 public class CharacterService {
 
     private final CharacterRepository characterRepository;
-    private final ItemRepository itemRepository;
     private final CharacterValidator validator;
 
     public Character create(Character character) throws Exception {
@@ -32,7 +32,7 @@ public class CharacterService {
     }
 
     public Character findById(Long id){
-        return characterRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("not found"));
+        return characterRepository.findById(id).orElseThrow(()-> new NotFound("not found character"));
     }
 
     public void updateNameSummoner(Long id, UpdateNameSummonerDTO updatedNameSummonerDTO){
@@ -65,7 +65,7 @@ public class CharacterService {
         characterRepository.save(character);
     }
 
-    public Item findAmulet(Long idCharacter){
+    public Item findAmulet(Long idCharacter){ // testarrrrrrrrr
         Character character = this.findById(idCharacter);
 
         return character.getItems()
@@ -75,11 +75,6 @@ public class CharacterService {
                 .orElseThrow(()-> new EntityNotFoundException("Amulet not found"));
 
     }
-
-    private Item findItemById(Long idItem){
-        return itemRepository.findById(idItem).orElseThrow(()->new EntityNotFoundException("item not found"));
-    }
-
 
 }
 
